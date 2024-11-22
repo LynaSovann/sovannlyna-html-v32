@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sovannlyna-html-v32
+  namespace: argocd
+  annotations:
+    notifications.argocd.argoproj.io/subscribe.on-sync-succeeded: "updateDeploymentStatusTrigger"
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/LynaSovann/sovannlyna-html-v32.git
+    targetRevision: main
+    path: manifests
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: sovannlyna-html-v32
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  revisionHistoryLimit: 5
