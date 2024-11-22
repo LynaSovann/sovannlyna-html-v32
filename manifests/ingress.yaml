@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sovannlyna-html-v32-https-ingress
+  namespace: sovannlyna-html-v32
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - aws-4.tinhlgkiddy.fun
+      secretName: sovannlyna-html-v32-secret-tls
+  rules:
+    - host: aws-4.tinhlgkiddy.fun
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: sovannlyna-html-v32-service
+                port:
+                  number: 8243
