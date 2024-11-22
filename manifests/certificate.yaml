@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: sovannlyna-html-v32-certificate
+  namespace: sovannlyna-html-v32
+spec:
+  secretName: sovannlyna-html-v32-secret-tls
+  commonName: aws-4.tinhlgkiddy.fun
+  dnsNames:
+  - aws-4.tinhlgkiddy.fun
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
